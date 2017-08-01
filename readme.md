@@ -250,33 +250,33 @@ Preparing for Spring Interview is tricky. You would need to get a good understan
 
 ## What Will I Learn?
 
-Covers interview questions extensively on Spring, Spring Boot and Spring MVC
-Covers basic interview questions of JPA, Spring Data, Spring Data JPA, Spring AOP 
-Covers interview questions on building RESTful Web Services and SOAP Web Services with Spring extensively
-Understand questions asked in Beginner Spring Interviews
-Answer questions on basics of Spring Framework - IOC, Application Context, Dependency Injection, Scope and Component Scan
-Use appropriate Spring Annotations - @Component, @Service, @Repository, @Controller,  @Autowired, @Primary, @Qualifier, @Configuration
-Understand and Answer questions on Spring Boot, Spring Data and Spring MVC
-Understand basic features of Spring Boot - Starters, Auto Configuration, Actuator and Externalized Configuration
-Review Best Practices of all frameworks listed above
-Answer questions on Spring Web Services (REST and SOAP)
-Understand Spring Exception Handling Best Practices
-Understand how to handle validation errors with Spring
-Understand concepts like Versioning, Content Negotiation on RESTful Services
-Understand documentation of your RESTful Services with Swagger
+- Covers interview questions extensively on Spring, Spring Boot and Spring MVC
+- Covers basic interview questions of JPA, Spring Data, Spring Data JPA, Spring AOP 
+- Covers interview questions on building RESTful Web Services and SOAP Web Services with Spring extensively
+- Understand questions asked in Beginner Spring Interviews
+- Answer questions on basics of Spring Framework - IOC, Application Context, Dependency Injection, Scope and Component Scan
+- Use appropriate Spring Annotations - @Component, @Service, @Repository, @Controller,  @Autowired, @Primary, @Qualifier, @Configuration
+- Understand and Answer questions on Spring Boot, Spring Data and Spring MVC
+- Understand basic features of Spring Boot - Starters, Auto Configuration, Actuator and Externalized Configuration
+- Review Best Practices of all frameworks listed above
+- Answer questions on Spring Web Services (REST and SOAP)
+- Understand Spring Exception Handling Best Practices
+- Understand how to handle validation errors with Spring
+- Understand concepts like Versioning, Content Negotiation on RESTful Services
+- Understand documentation of your RESTful Services with Swagger
 
 ## Requirements
 
-Familiarity with Spring and any Java IDE
-In the course, we use Eclipse to demonstrate examples.
-Access to Github Repository
+- Familiarity with Spring and any Java IDE
+- In the course, we use Eclipse to demonstrate examples.
+- Access to Github Repository
 
 ## Who is the target audience?
 
-Students who are learning Java
-Students who are learning Spring
-Students who are planning to attend Java & Spring Interviews
-Students who want to add more depth to their Spring Knowledge
+- Students who are learning Java
+- Students who are learning Spring
+- Students who are planning to attend Java & Spring Interviews
+- Students who want to add more depth to their Spring Knowledge
 
 
 ### Other Courses
