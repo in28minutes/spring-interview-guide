@@ -4,7 +4,7 @@ Preparing for Spring Interview is tricky. You would need to get a good understan
 
 ## Spring
 
-- What is loose coupling?
+- What is Loose Coupling?
 - What is a Dependency?
 - What is IOC (Inversion of Control)?
 - What is Dependency Injection?
@@ -15,7 +15,7 @@ Preparing for Spring Interview is tricky. You would need to get a good understan
 - Can you compare Bean Factory with Application Context?
 - How do you create an application context with Spring?
 - How does Spring know where to search for Components or Beans?
-- What is a component scan? 
+- What is a Component Scan? 
 - How do you define a component scan in XML and Java Configurations?
 - How is it done with Spring Boot?
 - What does @Component signify?
@@ -235,6 +235,15 @@ Preparing for Spring Interview is tricky. You would need to get a good understan
 - Installation Video : https://www.youtube.com/playlist?list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3
 - GIT Repository For Installation : https://github.com/in28minutes/getting-started-in-5-steps
 - PDF : https://github.com/in28minutes/SpringIn28Minutes/blob/master/InstallationGuide-JavaEclipseAndMaven_v2.pdf
+
+## Git Repository
+- http://github.com/in28minutes/spring-interview-guide
+
+## Presentation
+- Downlad the zip or clone the git
+- Unzip the zip file
+- Go to folder 1.presentation
+- Launch spring-interview-questions.html in your favorite browser
 
 ## Running Examples
 - Download the zip or clone the Git repository.
