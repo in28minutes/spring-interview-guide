@@ -1,6 +1,12 @@
 # Spring Interview Guide - 200+ Questions and Answers
 
-Preparing for Spring Interview is tricky. You would need to get a good understanding of new features and revise concepts you used in your preparation. This course helps you prepare for Spring Interview with hands-on code examples covering 200+ Spring Interview Questions and Answers on varied range of topics listed below. 
+Spring Framework is the most popular Java Framework ever. It continues to evolve with changing architectures. Spring Boot is one of the most popular Spring projects. Spring Boot is the most used Java framework to develop RESTful Services and Microservices.
+
+Preparing for Spring Interview is tricky. There are wide variety of Spring Modules and Spring Projects you would need to recollect and be prepared to answer questions on.You would need to get a good understanding of the new features of Spring and have firm grasp of the  concepts you implemented in your projects. 
+
+This course helps you prepare for Spring Interview with code examples covering 200+ Spring Interview Questions and Answers on Spring, Spring Boot, Spring MVC, Spring JDBC, JPA, AOP, RESTful Services and SOAP Web Services. 
+
+List of questions discussed about each topic is listed below. 
 
 ## Spring
 
@@ -259,33 +265,28 @@ Preparing for Spring Interview is tricky. You would need to get a good understan
 
 ## What Will I Learn?
 
-- Covers interview questions extensively on Spring, Spring Boot and Spring MVC
-- Covers basic interview questions of JPA, Spring Data, Spring Data JPA, Spring AOP 
-- Covers interview questions on building RESTful Web Services and SOAP Web Services with Spring extensively
-- Understand questions asked in Beginner Spring Interviews
-- Answer questions on basics of Spring Framework - IOC, Application Context, Dependency Injection, Scope and Component Scan
-- Use appropriate Spring Annotations - @Component, @Service, @Repository, @Controller,  @Autowired, @Primary, @Qualifier, @Configuration
-- Understand and Answer questions on Spring Boot, Spring Data and Spring MVC
-- Understand basic features of Spring Boot - Starters, Auto Configuration, Actuator and Externalized Configuration
-- Review Best Practices of all frameworks listed above
-- Answer questions on Spring Web Services (REST and SOAP)
-- Understand Spring Exception Handling Best Practices
-- Understand how to handle validation errors with Spring
-- Understand concepts like Versioning, Content Negotiation on RESTful Services
-- Understand documentation of your RESTful Services with Swagger
+- You will learn to answer 200 interview questions on Spring, Spring Boot and Spring MVC
+- You will learn to answer questions on basics of JPA, Spring Data, Spring Data JPA, Spring AOP
+- You will learn to answer questions on RESTful Web Services and SOAP Web Services with Spring & Spring Boot
+- You will learn to answer questions on basics of Spring Framework - IOC, Application Context, Dependency Injection, Scope and Component Scan
+- You will learn about Spring Annotations - @Component, @Service, @Repository, @Controller, @Autowired, @Primary, @Qualifier, @Configuration
+- You will understand basic features of Spring Boot - Starters, Auto Configuration, Actuator and Externalized Configuration
+- You will be introduced to the Best Practices in using Spring and Spring Boot
+- You will be introduced to the approaches to handle validation errors with Spring MVC and Spring REST
+- You will be introduced to the approaches for Versioning, Content Negotiation with RESTful Services
+- You will understand the best practices in documenting your RESTful Services with Swagger
 
 ## Requirements
 
-- Familiarity with Spring and any Java IDE
-- In the course, we use Eclipse to demonstrate examples.
-- Access to Github Repository
+- We use Eclipse as the IDE to demonstrate 100 code examples
+- You should have some programming experience with Java and Spring
 
 ## Who is the target audience?
 
-- Students who are learning Java
-- Students who are learning Spring
-- Students who are planning to attend Java & Spring Interviews
-- Students who want to add more depth to their Spring Knowledge
+- You are learning Java
+- You are learning Spring
+- You want to attend Java & Spring Interviews
+- You want to add more depth to your Spring Knowledge
 
 
 ### Other Courses
