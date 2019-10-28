@@ -1,6 +1,18 @@
 body:after {
-content: url(../images/logo.png);
+content: url(../images/rangaraokaranam-4.png);
 position: fixed;
 top: 1em;
 right: 1em;
+}
+
+.reveal h1 {
+	color: #D14D28;
+}
+
+.reveal h2 {
+	color: #1BA84A;
+}
+
+.reveal h3 {
+	color: #59C8DE;
 }
