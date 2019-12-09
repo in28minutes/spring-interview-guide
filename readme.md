@@ -1,5 +1,8 @@
 # Spring Interview Guide - 200+ Questions and Answers
 
+[![Image](https://www.springboottutorial.com/images/Course-Java-Interview-Guide-200-Interview-Questions-and-Answers.png "Java Interview Guide : 200+ Interview Questions and Answers")](https://www.udemy.com/course/java-interview-questions-and-answers/)
+
+
 Spring Framework is the most popular Java Framework ever. It continues to evolve with changing architectures. Spring Boot is one of the most popular Spring projects. Spring Boot is the most used Java framework to develop RESTful Services and Microservices.
 
 Preparing for Spring Interview is tricky. There are wide variety of Spring Modules and Spring Projects you would need to recollect and be prepared to answer questions on.You would need to get a good understanding of the new features of Spring and have firm grasp of the  concepts you implemented in your projects. 
@@ -289,12 +292,15 @@ List of questions discussed about each topic is listed below.
 - You want to add more depth to your Spring Knowledge
 
 
-## About in28Minutes
+### Troubleshooting
+- Refer our TroubleShooting Guide - https://github.com/in28minutes/in28minutes-initiatives/tree/master/The-in28Minutes-TroubleshootingGuide-And-FAQ
 
-At in28Minutes, we ask ourselves one question everyday
-> How do we create more amazing course experiences? 
-> We use 80-20 Rule. We discuss 20% things used 80% of time in depth.
+## Youtube Playlists - 500+ Videos
 
-We are creating amazing learning experiences for learning Spring Boot with AWS, Azure, GCP, Docker, Kubernetes and Full Stack. 300,000 Learners rely on our expertise.  [Find out more.... ](https://github.com/in28minutes/learn#best-selling-courses)
+[Click here - 30+ Playlists with 500+ Videos on Spring, Spring Boot, REST, Microservices and the Cloud](https://www.youtube.com/user/rithustutorials/playlists?view=1&sort=lad&flow=list)
+
+## Keep Learning in28Minutes
+
+in28Minutes is creating amazing solutions for you to learn Spring Boot, Full Stack and the Cloud - Docker, Kubernetes, AWS, React, Angular etc. - [Check out all our courses here](https://github.com/in28minutes/learn)
 
 ![in28MinutesLearningRoadmap-July2019.png](https://github.com/in28minutes/in28Minutes-Course-Roadmap/raw/master/in28MinutesLearningRoadmap-July2019.png)
