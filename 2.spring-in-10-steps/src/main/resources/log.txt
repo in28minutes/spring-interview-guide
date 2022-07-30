@@ -6,10 +6,8 @@ Creating instance of bean 'binarySearchImpl'
 Creating instance of bean 'bubbleSortAlgorithm'
 Finished creating instance of bean 'bubbleSortAlgorithm'
 
-Constuctor - Autowiring by type from bean name 'binarySearchImpl' via constructor 
-to bean named 'bubbleSortAlgorithm'
+Constructor - Autowiring by type from bean name 'binarySearchImpl' via constructor to bean named 'bubbleSortAlgorithm'
 Setter -  Autowiring by type from bean name 'binarySearchImpl' to bean named 'bubbleSortAlgorithm'
 No Setter or Constructor - Autowiring by type from bean name 'binarySearchImpl' to bean named 'bubbleSortAlgorithm'
-
 
 Finished creating instance of bean 'binarySearchImpl'
