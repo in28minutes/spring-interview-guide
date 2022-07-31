@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionController {
 
-	private Log logger = LogFactory.getLog(ExceptionController.class);
+    private final Log LOGGER = LogFactory.getLog(ExceptionController.class);
 
-	@ExceptionHandler(value = Exception.class)
-	public String handleException(HttpServletRequest request, Exception ex) {
-		logger.error("Request " + request.getRequestURL()
-				+ " Threw an Exception", ex);
-		return "error";
-	}
+    @ExceptionHandler(value = Exception.class)
+    public String handleException(HttpServletRequest request, Exception ex) {
+		LOGGER.error("Request " + request.getRequestURL() + " Threw an Exception", ex);
+        return "error";
+    }
 
 }

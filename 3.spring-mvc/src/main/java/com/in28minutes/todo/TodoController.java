@@ -1,6 +1,7 @@
 package com.in28minutes.todo;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,89 +32,80 @@ import com.in28minutes.exception.ExceptionController;
 @SessionAttributes("name")
 public class TodoController {
 
-	private Log logger = LogFactory.getLog(ExceptionController.class);
+    private final Log LOGGER = LogFactory.getLog(ExceptionController.class);
 
-	@Autowired
-	TodoService service;
+    @Autowired
+    TodoService service;
 
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-				dateFormat, false));
-	}
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    }
 
-	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
-	public String listTodos(ModelMap model) {
-		model.addAttribute("todos",
-				service.retrieveTodos(retrieveLoggedinUserName()));
-		return "list-todos";
-	}
+    @GetMapping("/list-todos")
+    public String listTodos(ModelMap model) {
+        model.addAttribute("todos", service.retrieveTodos(retrieveLoggedInUserName()));
+        return "list-todos";
+    }
 
-	private String retrieveLoggedinUserName() {
-		Object principal = SecurityContextHolder.getContext()
-				.getAuthentication().getPrincipal();
 
-		if (principal instanceof UserDetails)
-			return ((UserDetails) principal).getUsername();
+    @GetMapping("/add-todo")
+    public String showTodoPage(ModelMap model) {
+        model.addAttribute("todo", new Todo(0, retrieveLoggedInUserName(), "", LocalDate.now(), false));
+        return "todo";
+    }
 
-		return principal.toString();
-	}
+    @PostMapping("/add-todo")
+    public String addTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+        if (result.hasErrors()) {
+            return "todo";
+        }
+        service.addTodo(retrieveLoggedInUserName(), todo.getDesc(), LocalDate.now(), false);
+        model.clear();
+        return "redirect:list-todos";
+    }
 
-	@RequestMapping(value = "/add-todo", method = RequestMethod.GET)
-	public String showTodoPage(ModelMap model) {
+    @GetMapping("/update-todo")
+    public String updateTodo(ModelMap model, @RequestParam int id) {
+        Todo todo = service.retrieveTodo(id);
+        model.addAttribute("todo", todo);
+        return "todo";
+    }
 
-		model.addAttribute("todo", new Todo(0, retrieveLoggedinUserName(), "",
-				new Date(), false));
-		return "todo";
+    @PostMapping("/update-todo")
+    public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+        // Update to do
+        if (result.hasErrors()) {
+            return "todo";
+        }
 
-	}
+        todo.setUser(retrieveLoggedInUserName());
+        service.updateTodo(todo);
 
-	@RequestMapping(value = "/add-todo", method = RequestMethod.POST)
-	public String addTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
-		if (result.hasErrors()) {
-			return "todo";
-		}
-		service.addTodo(retrieveLoggedinUserName(), todo.getDesc(), new Date(),
-				false);
-		model.clear();
-		return "redirect:list-todos";
-	}
+        return "redirect:list-todos";
+    }
 
-	@RequestMapping(value = "/update-todo", method = RequestMethod.GET)
-	public String updateTodo(ModelMap model, @RequestParam int id) {
-		Todo todo = service.retrieveTodo(id);
-		model.addAttribute("todo", todo);
-		return "todo";
-	}
+    @GetMapping("/delete-todo")
+    public String deleteTodo(ModelMap model, @RequestParam int id) {
+        service.deleteTodo(id);
+        model.clear();
+        return "redirect:list-todos";
+    }
 
-	@RequestMapping(value = "/update-todo", method = RequestMethod.POST)
-	public String updateTodo(ModelMap model, @Valid Todo todo,
-			BindingResult result) {
-		// Update to do
-		if (result.hasErrors()) {
-			return "todo";
-		}
+    @ExceptionHandler(value = Exception.class)
+    public String handleException(HttpServletRequest request, Exception ex) {
+        LOGGER.error("Request " + request.getRequestURL() + " Threw an Exception", ex);
+        return "error-specific";
+    }
 
-		todo.setUser(retrieveLoggedinUserName());
+    private String retrieveLoggedInUserName() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		service.updateTodo(todo);
+        if (principal instanceof UserDetails)
+            return ((UserDetails) principal).getUsername();
 
-		return "redirect:list-todos";
-	}
-
-	@RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
-	public String deleteTodo(ModelMap model, @RequestParam int id) {
-		service.deleteTodo(id);
-		model.clear();
-		return "redirect:list-todos";
-	}
-
-	@ExceptionHandler(value = Exception.class)
-	public String handleException(HttpServletRequest request, Exception ex) {
-		logger.error("Request " + request.getRequestURL()
-				+ " Threw an Exception", ex);
-		return "error-specific";
-	}
+        return principal.toString();
+    }
 
 }
