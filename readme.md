@@ -9,7 +9,7 @@ Preparing for Spring Interview is tricky. There are wide variety of Spring Modul
 
 This course helps you prepare for Spring Interview with code examples covering 200+ Spring Interview Questions and Answers on Spring, Spring Boot, Spring MVC, Spring JDBC, JPA, AOP, RESTful Services and SOAP Web Services. 
 
-List of questions discussed about each topic is listed below. 
+List of questions discussed about each topic is listed below
 
 ## Spring
 
