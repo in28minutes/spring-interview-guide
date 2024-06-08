@@ -411,7 +411,7 @@ public class Main {
         Engine engine = new PetrolEngine(); // Engine dependency is created outside
         Car car = new Car(engine);          // Engine is injected into Car
         car.drive();
-    }
+    }****
 }
 ```
 
@@ -434,3 +434,96 @@ In this setup, the control of creating the `Engine` object is inverted. The `Car
 ### Summary
 
 **Inversion of Control (IoC)** is a design principle that shifts the control of program execution and dependency management from the application code to an external framework or container. Dependency injection is a common method to achieve IoC, resulting in decoupled, testable, and maintainable code.
+
+****
+### 5.What is Bean in Spring?
+
+In simple terms, a **bean** in the context of the Spring Framework is an object that is created, configured, and managed by the Spring container. Think of a bean as a component or building block of a Spring application that Spring takes care of for you.
+
+### Key Points in Simple Terms:
+
+1. **Object**: A bean is just a regular Java object.
+2. **Managed by Spring**: Instead of you creating and managing this object directly in your code, Spring does it for you.
+3. **Configuration**: You tell Spring how to create and configure this object either through XML files, Java annotations, or Java configuration classes.
+4. **Dependency Injection**: Spring can inject dependencies into your beans, which means it can set up and connect the different parts of your application automatically.
+
+### Simple Example:
+
+Imagine you have a `Car` that needs an `Engine` to run. In Spring:
+
+1. **Define the Beans**:
+   - You tell Spring about the `Car` and `Engine` objects.
+
+```java
+public class Engine {
+    public void start() {
+        System.out.println("Engine started");
+    }
+}
+
+public class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving");
+    }
+}
+```
+
+2. **Configuration with Annotations**:
+   - Use `@Component` to tell Spring these are the objects it should manage.
+
+```java
+import org.springframework.stereotype.Component;
+
+@Component
+public class Engine {
+    public void start() {
+        System.out.println("Engine started");
+    }
+}
+
+@Component
+public class Car {
+    private Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving");
+    }
+}
+```
+
+3. **Spring Takes Care of the Rest**:
+   - You don’t have to create and wire up the `Car` and `Engine` objects manually. Spring does it for you.
+
+```java
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Car car = context.getBean(Car.class);
+        car.drive();
+    }
+}
+```
+
+In this setup:
+- Spring creates the `Engine` and `Car` objects.
+- Spring injects the `Engine` into the `Car` automatically.
+
+### Summary:
+
+A **bean** is a Spring-managed object that Spring takes care of creating, configuring, and wiring together with other beans. This helps simplify your application code and manage dependencies more effectively.
