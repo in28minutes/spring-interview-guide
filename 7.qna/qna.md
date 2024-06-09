@@ -527,3 +527,195 @@ In this setup:
 ### Summary:
 
 A **bean** is a Spring-managed object that Spring takes care of creating, configuring, and wiring together with other beans. This helps simplify your application code and manage dependencies more effectively.
+
+****
+### 6. What is Autowiring?
+
+- **Autowiring** is a feature in Spring Framework that allows the automatic injection of dependencies into a bean, reducing the need for explicit configuration. 
+- Autowiring can automatically resolve and inject collaborating beans into your Spring-managed bean.
+
+### Autowired Annotation
+
+The `@Autowired` annotation in Spring is used to enable automatic dependency injection. It can be applied to constructors, fields, setter methods, and configuration methods to indicate that the dependency should be autowired by the Spring container.
+
+### Types of Autowiring in Spring
+
+1. **no**: Default setting, autowiring is turned off. Dependencies need to be explicitly defined in the configuration.
+2. **byName**: Autowires by property name. Spring looks for a bean with the same name as the property to inject.
+3. **byType**: Autowires by type. Spring looks for a bean of the same type as the property to inject.
+4. **constructor**: Autowires by type using the constructor. This is suitable for constructor-based dependency injection.
+5. **autodetect**: Spring first tries constructor autowiring, and if no suitable constructor is found, it uses byType autowiring.
+
+### Using @Autowired Annotation
+
+#### Field Injection
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Car {
+    @Autowired
+    private Engine engine;
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving");
+    }
+}
+```
+
+#### Setter Injection
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Car {
+    private Engine engine;
+
+    @Autowired
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving");
+    }
+}
+```
+
+#### Constructor Injection
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Car {
+    private final Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving");
+    }
+}
+```
+
+### Configuration for Autowiring
+
+#### XML Configuration
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <context:component-scan base-package="com.example" />
+
+</beans>
+```
+
+#### Java Configuration
+
+```java
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig {
+}
+```
+
+### Benefits of Autowiring
+
+1. **Reduced Configuration**: Reduces the need for explicit bean wiring, making configuration simpler and cleaner.
+2. **Increased Productivity**: Speeds up development by minimizing boilerplate code.
+3. **Flexibility**: Supports various autowiring modes to fit different scenarios.
+
+### Example of Autowiring
+
+Let's combine all these concepts into a single example:
+
+#### Engine Interface and Implementation
+
+```java
+public interface Engine {
+    void start();
+}
+
+@Component
+public class PetrolEngine implements Engine {
+    @Override
+    public void start() {
+        System.out.println("Petrol engine started");
+    }
+}
+```
+
+#### Car Class Using @Autowired
+
+```java
+@Component
+public class Car {
+    private Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving");
+    }
+}
+```
+
+#### Spring Application Configuration
+
+```java
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig {
+}
+```
+
+#### Main Class to Run the Application
+
+```java
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        Car car = context.getBean(Car.class);
+        car.drive();
+    }
+}
+```
+
+In this complete example:
+- `Engine` is an interface.
+- `PetrolEngine` is a concrete implementation of `Engine` and is annotated with `@Component` to be detected by component scanning.
+- `Car` has a dependency on `Engine` and uses constructor-based autowiring to inject the dependency.
+- `AppConfig` is a configuration class that uses `@ComponentScan` to enable component scanning.
+- The `Main` class runs the application and retrieves the `Car` bean from the Spring context to invoke the `drive` method.
+
+Autowiring with `@Autowired` simplifies dependency injection and reduces the amount of configuration required in your Spring application.
+
+****
