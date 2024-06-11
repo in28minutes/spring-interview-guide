@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 public class Car {
     private Engine engine;
 
+    //constructor based di
+    //autowiring using constructor type
     @Autowired
     public Car(Engine engine) {
         this.engine = engine;

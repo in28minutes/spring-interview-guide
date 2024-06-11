@@ -719,3 +719,6 @@ In this complete example:
 Autowiring with `@Autowired` simplifies dependency injection and reduces the amount of configuration required in your Spring application.
 
 ****
+
+### 7.What are the important roles of an IOC Container?
+
