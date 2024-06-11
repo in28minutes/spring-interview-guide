@@ -721,4 +721,256 @@ Autowiring with `@Autowired` simplifies dependency injection and reduces the amo
 ****
 
 ### 7.What are the important roles of an IOC Container?
+- Find beans :
+    - Identifies the required beans (components) to be managed.
+    - Creates instance of the beans.
+    - Manages the lifecycle of the beans from creation to initialisation to destruction.
+- Manage the lifecycle of beans
+- Wire Dependency
+    - Identifies the dependency required by the beans.
+    - wires the dependency into the beans.
 
+### Example Code
+
+1. **Components and Beans**
+
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+// Define the SortAlgorithm interface
+interface SortAlgorithm {
+    void sort();
+}
+
+// QuickSortAlgorithm implementation
+@Component
+class QuickSortAlgorithm implements SortAlgorithm {
+    @Override
+    public void sort() {
+        System.out.println("QuickSort algorithm is sorting");
+    }
+}
+
+// ComplexAlgorithm component with a dependency on SortAlgorithm
+@Component
+class ComplexAlgorithm {
+    private final SortAlgorithm sortAlgorithm;
+
+    @Autowired
+    public ComplexAlgorithm(SortAlgorithm sortAlgorithm) {
+        this.sortAlgorithm = sortAlgorithm;
+    }
+
+    public void performComplexOperation() {
+        System.out.println("Performing complex algorithm operation");
+        sortAlgorithm.sort();
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("ComplexAlgorithm bean is initialized");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("ComplexAlgorithm bean is about to be destroyed");
+    }
+}
+
+// Configuration class for component scanning
+@Configuration
+@ComponentScan(basePackages = "com.example")
+class AppConfig {
+}
+
+// Main application class
+public class MainApp {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ComplexAlgorithm complexAlgorithm = context.getBean(ComplexAlgorithm.class);
+        complexAlgorithm.performComplexOperation();
+        context.close();
+    }
+}
+```
+
+### Explanation
+
+1. **Bean Creation and Management:**
+   - **Identification of Beans:**
+     - `@Component` on `QuickSortAlgorithm` and `ComplexAlgorithm` makes them Spring-managed beans.
+   - **Bean Creation:**
+     - Spring automatically creates instances of these beans.
+
+2. **Dependency Injection:**
+   - **Identification of Dependencies:**
+     - `ComplexAlgorithm` requires a `SortAlgorithm`.
+   - **Wiring Dependencies:**
+     - `@Autowired` injects `QuickSortAlgorithm` into `ComplexAlgorithm`.
+
+3. **Lifecycle Management:**
+   - **Initialization:**
+     - `@PostConstruct` annotated `init` method in `ComplexAlgorithm` is called after the bean is fully initialized.
+   - **Destruction:**
+     - `@PreDestroy` annotated `destroy` method in `ComplexAlgorithm` is called before the bean is destroyed.
+
+### Running the Example
+**Run the Main Application:**
+   - Execute the `MainApp` class. You should see the following output:
+     ```
+     ComplexAlgorithm bean is initialized
+     Performing complex algorithm operation
+     QuickSort algorithm is sorting
+     ComplexAlgorithm bean is about to be destroyed
+     ```
+
+This example demonstrates how the Spring IoC container identifies beans, manages dependencies, and handles bean lifecycle events.
+
+****
+
+### 8.What are Bean Factory and Application Context?
+There are two parts of IOC Container -
+#### 1. BeanFactory
+- **Basic Container**: Provides fundamental IoC capabilities.
+- **Roles**:
+  - **Find Beans**:
+    - Identifies the required beans (components) to be managed.
+    - Creates instances of the beans.
+    - Manages the lifecycle of the beans from creation to initialization to destruction.
+  - **Wire Dependency**:
+    - Identifies the dependencies required by the beans.
+    - Wires the dependencies into the beans.
+- **Use Cases**:
+  - Suitable for lightweight applications that uses less memory.
+
+#### 2. ApplicationContext (BeanFactory++)
+- **Advanced Container**: Extends BeanFactory and provides additional enterprise-level features.
+- **Additional Features**:
+  - **AOP (Aspect-Oriented Programming)**:
+    - Built-in support for defining and managing aspects.
+  - **Internationalization (i18n)**:
+    - Provides support for message sources for localization.
+  - **Web Application Context**:
+    - Specific features for web applications, such as request and session scopes.
+- **Use Cases**:
+- Suitable for: Enterprise-level and complex applications.
+
+****
+### 9.How do you create an application context with Spring?
+Creating an application context with Spring involves setting up your Spring application configuration and using one of the available classes to initialize the context. Here's a step-by-step guide on how to do this:
+
+### 1. Using XML Configuration
+
+#### Step 1: Create the XML Configuration File
+
+Create an XML file (e.g., `applicationContext.xml`) to define your beans and their dependencies.
+
+```xml
+<!-- applicationContext.xml -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Define a bean -->
+    <bean id="simpleBean" class="com.example.SimpleBean"/>
+    
+</beans>
+```
+
+#### Step 2: Create the Java Classes
+
+Define your beans in Java classes.
+
+```java
+package com.example;
+
+public class SimpleBean {
+    public void sayHello() {
+        System.out.println("Hello from SimpleBean");
+    }
+}
+```
+
+#### Step 3: Load the ApplicationContext in the Main Class
+
+Use `ClassPathXmlApplicationContext` to load the context from the XML configuration.
+
+```java
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        SimpleBean simpleBean = (SimpleBean) context.getBean("simpleBean");
+        simpleBean.sayHello();
+    }
+}
+```
+
+### 2. Using Java Configuration
+
+#### Step 1: Create the Configuration Class
+
+Define a configuration class using `@Configuration` and `@Bean` annotations.
+
+```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public SimpleBean simpleBean() {
+        return new SimpleBean();
+    }
+}
+```
+
+#### Step 2: Create the Java Classes
+
+Define your beans in Java classes.
+
+```java
+package com.example;
+
+public class SimpleBean {
+    public void sayHello() {
+        System.out.println("Hello from SimpleBean");
+    }
+}
+```
+
+#### Step 3: Load the ApplicationContext in the Main Class
+
+Use `AnnotationConfigApplicationContext` to load the context from the Java configuration class.
+
+```java
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        SimpleBean simpleBean = context.getBean(SimpleBean.class);
+        simpleBean.sayHello();
+    }
+}
+```
+
+
+### Summary
+
+- **XML Configuration**: Use `ClassPathXmlApplicationContext` to load the context from an XML configuration file.
+- **Java Configuration**: Use `AnnotationConfigApplicationContext` to load the context from a Java configuration class.
+- **Spring Boot**: Automatically creates and configures the application context.
+
+Each approach has its use cases, with XML and Java configurations being more explicit, while Spring Boot provides a more streamlined and automated setup.
