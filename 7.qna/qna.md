@@ -1,4 +1,4 @@
-### 1.Loose Coupling vs Tight Coupling
+### 1. Loose Coupling vs Tight Coupling
 **Tight Coupling**
 
 Tight coupling refers to a situation where components in a system are highly dependent on each other. This means that a change in one component often necessitates changes in other components. Tight coupling can lead to systems that are hard to maintain, test, and extend because the interconnectedness means that altering one part of the system has wide-ranging effects.
@@ -81,7 +81,7 @@ a.execute();  // Output: Doing something in AnotherService
 In summary, tight coupling creates a rigid system where components are heavily interdependent, whereas loose coupling promotes a more modular, flexible, and maintainable system.****
 ****
 
-### 2.What is Dependency?
+### 2. What is Dependency?
 
 - A **dependency** in software engineering is a relationship where one component or module relies on another to function. 
 - Dependencies can be between classes, functions, modules, services, or even entire applications. 
@@ -122,7 +122,7 @@ public class Main {
 In this example, `Car` is tightly coupled to `Engine`, meaning `Car` directly creates an instance of `Engine` and relies on it to function.
 
 ****
-### 3.What is Dependency Injection?
+### 3. What is Dependency Injection?
 
 - **Dependency Injection (DI)** is a design pattern used to achieve Inversion of Control (IoC) between classes and their dependencies. 
 - Instead of a class creating its dependencies, they are provided externally. 
@@ -321,7 +321,7 @@ In summary:
 - **Object:** Is a specific instance of a class with actual values for the properties and capable of exhibiting the defined behaviors.
 ****
 
-### 4.What is Inversion of Control (IOC)?
+### 4. What is Inversion of Control (IOC)?
 - Inversion of Control (IoC) is a design principle in software engineering where the control flow of a program is inverted. 
 - Instead of the application controlling the flow, an external entity or framework takes over that control. 
 - IoC is often used in conjunction with dependency injection to create more flexible, maintainable, and testable software.
@@ -436,7 +436,7 @@ In this setup, the control of creating the `Engine` object is inverted. The `Car
 **Inversion of Control (IoC)** is a design principle that shifts the control of program execution and dependency management from the application code to an external framework or container. Dependency injection is a common method to achieve IoC, resulting in decoupled, testable, and maintainable code.
 
 ****
-### 5.What is Bean in Spring?
+### 5. What is Bean in Spring?
 
 In simple terms, a **bean** in the context of the Spring Framework is an object that is created, configured, and managed by the Spring container. Think of a bean as a component or building block of a Spring application that Spring takes care of for you.
 
@@ -720,7 +720,7 @@ Autowiring with `@Autowired` simplifies dependency injection and reduces the amo
 
 ****
 
-### 7.What are the important roles of an IOC Container?
+### 7. What are the important roles of an IOC Container?
 - Find beans :
     - Identifies the required beans (components) to be managed.
     - Creates instance of the beans.
@@ -834,7 +834,7 @@ This example demonstrates how the Spring IoC container identifies beans, manages
 
 ****
 
-### 8.What are Bean Factory and Application Context?
+### 8. What are Bean Factory and Application Context?
 There are two parts of IOC Container -
 #### 1. BeanFactory
 - **Basic Container**: Provides fundamental IoC capabilities.
@@ -862,7 +862,7 @@ There are two parts of IOC Container -
 - Suitable for: Enterprise-level and complex applications.
 
 ****
-### 9.How do you create an application context with Spring?
+### 9. How do you create an application context with Spring?
 Creating an application context with Spring involves setting up your Spring application configuration and using one of the available classes to initialize the context. Here's a step-by-step guide on how to do this:
 
 ### 1. Using XML Configuration
@@ -989,7 +989,7 @@ There are 2 ways to define our component scan.
 
 it enables automatic scanning for the pkg, in class @SpringBootApplication is used.
 
-### 11. How does Spring know where to search for Components or Beans?
+### 11.1. How does Spring know where to search for Components or Beans?
 
 Spring knows where to search for components or beans through a mechanism called **component scanning**. By specifying the packages to scan, Spring automatically detects classes annotated with stereotype annotations (like `@Component`, `@Service`, `@Repository`, `@Controller`, etc.) and registers them as beans in the application context.
 
