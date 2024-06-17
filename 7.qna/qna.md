@@ -1389,7 +1389,7 @@ This makes your classes more modular and easier to manage.
 
 ****
 
-17. What’s the difference Between @Controller, @Component, @Repository, and @Service Annotations in Spring?
+### 17. What’s the difference Between @Controller, @Component, @Repository, and @Service Annotations in Spring?
 
 ### Summary of Differences with Code Examples
 
