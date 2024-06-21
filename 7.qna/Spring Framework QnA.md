@@ -3051,7 +3051,7 @@ These annotations help in configuring and managing beans in a Spring application
 
 ****
 ### 48. Big Picture of the Spring Framework
-
+![alt text](image-8.png)
 #### Core Components:
 
 - **Core Container**:
