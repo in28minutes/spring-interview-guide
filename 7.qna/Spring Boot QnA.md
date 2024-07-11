@@ -383,3 +383,556 @@ Spring Initializr is a web-based tool provided by the Spring team to bootstrap a
 - **Ease of Use**: User-friendly interface with straightforward options for configuring and generating projects.
 
 In essence, Spring Initializr simplifies the process of starting new Spring Boot projects by providing a convenient way to set up projects with the right dependencies and configurations, allowing developers to focus more on application development rather than setup and boilerplate code.
+
+---
+
+### 15. What is application.properties and name some of the important things that can customized in application.properties?
+
+![alt text](image-23.png)
+
+![alt text](image-24.png)
+
+`application.properties` is a configuration file used in Spring Boot applications to define various settings and properties. This file allows you to customize the behavior of your Spring Boot application by setting key-value pairs for different configurations.
+
+### Important Customizations in `application.properties`:
+
+1. **Server Configuration**:
+   - **Server Port**: Change the default server port.
+     ```properties
+     server.port=9090
+     ```
+
+2. **Logging Configuration**:
+   - **File Location**: Set the location and name of the logging file.
+     ```properties
+     logging.file.name=/path/to/your/logfile.log
+     ```
+   - **Logging Levels**: Set the logging level for different packages.
+     ```properties
+     logging.level.org.springframework=DEBUG
+     ```
+
+3. **Profiles**:
+   - **Active Profiles**: Define which profiles are active.
+     ```properties
+     spring.profiles.active=dev
+     ```
+
+4. **Database Configuration**:
+   - **Datasource URL**: Set the URL of the database.
+     ```properties
+     spring.datasource.url=jdbc:mysql://localhost:3306/mydb
+     ```
+   - **Datasource Username and Password**: Set the database username and password.
+     ```properties
+     spring.datasource.username=root
+     spring.datasource.password=password
+     ```
+
+5. **Error Handling**:
+   - **Error Path**: Change the default error path.
+     ```properties
+     server.error.path=/custom-error
+     ```
+
+6. **Security Configuration**:
+   - **User Credentials**: Set default security credentials.
+     ```properties
+     spring.security.user.name=admin
+     spring.security.user.password=admin123
+     ```
+
+7. **View Resolver Configuration**:
+   - **Prefix and Suffix**: Set the prefix and suffix for view templates.
+     ```properties
+     spring.mvc.view.prefix=/WEB-INF/views/
+     spring.mvc.view.suffix=.jsp
+     ```
+
+8. **HTTP Message Converters**:
+   - **JSON Mapper**: Set the preferred JSON mapper.
+     ```properties
+     spring.mvc.converters.preferred-json-mapper=gson
+     ```
+
+9. **File Upload Settings**:
+   - **Max File Size**: Set the maximum file size for uploads.
+     ```properties
+     spring.servlet.multipart.max-file-size=2MB
+     spring.servlet.multipart.max-request-size=2MB
+     ```
+
+10. **Thymeleaf Configuration**:
+    - **Cache**: Enable or disable template caching.
+      ```properties
+      spring.thymeleaf.cache=false
+      ```
+
+These are just a few examples of the many configurations that can be customized using `application.properties` in a Spring Boot application. This file provides a centralized way to manage and tweak application settings without changing the code.
+
+Summary - 
+- It is like a property file.
+- We can toggle log level values in application.properties.
+- how we can to create serialisation
+- can set spring security username/password
+
+---
+
+### 16. How do you externalize configuration using Spring Boot?
+
+
+### `application.properties` and `application.yml`
+
+In Spring Boot, `application.properties` and `application.yml` are used to externalize configuration. This allows you to manage and modify configuration settings separately from your application code.
+
+### What is `application.properties`?
+
+`application.properties` is a file where configuration settings are defined in a key-value format.
+
+**Example**:
+```properties
+logging.level.org.springframework=DEBUG
+server.port=9090
+```
+
+### What is `application.yml`?
+
+`application.yml` is an alternative configuration file that uses YAML syntax, which stands for "YAML Ain't Markup Language." YAML is more readable and organizes configurations hierarchically.
+
+**Example**:
+```yaml
+logging:
+  level:
+    org:
+      springframework: DEBUG
+
+server:
+  port: 9090
+```
+
+### Key Customizations in `application.properties` or `application.yml`:
+
+1. **Logging Configuration**:
+   - **Logging Level**:
+     ```properties
+     logging.level.org.springframework=DEBUG
+     ```
+     ```yaml
+     logging:
+       level:
+         org:
+           springframework: DEBUG
+     ```
+
+2. **Server Configuration**:
+   - **Server Port**:
+     ```properties
+     server.port=9090
+     ```
+     ```yaml
+     server:
+       port: 9090
+     ```
+
+These files provide a centralized way to manage application settings, making it easier to adjust configurations without modifying the code itself.
+
+---
+
+### 17. How can you add custom application properties using Spring Boot?
+
+![alt text](image-25.png)
+
+![alt text](image-26.png)
+
+If you want to define custom properties in `application.properties` or `application.yml`, you can do this in application.properties or application.yml - 
+
+![alt text](image-27.png)
+
+---
+
+### 18. What is @ConfigurationProperties?
+
+`@ConfigurationProperties` is an annotation used in Spring Boot to bind external configuration properties (from `application.properties`, `application.yml`, environment variables, etc.) to a Java class. It allows you to group related properties together in a type-safe manner.
+
+**Key Features**:
+- **Prefix-Based Binding**: You specify a prefix, and all properties that start with that prefix are mapped to the fields in the class.
+- **Type Safety**: Properties are bound to specific types, providing compile-time checking.
+- **Easier Management**: Grouping related properties into a class makes it easier to manage and understand configuration settings.
+
+**Example**:
+```java
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix = "app")
+public class AppProperties {
+    private String name;
+    private String description;
+
+    // Getters and Setters
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+}
+```
+
+This class will automatically have its fields populated with the values from properties that start with `app.` in your `application.properties` or `application.yml`.
+
+---
+
+### 19. What is a Profile?
+
+![alt text](image-28.png)
+
+![alt text](image-29.png)
+
+![alt text](image-30.png)
+
+![alt text](image-31.png)
+
+> **Note**: We can even customise java beans with profiles.
+
+![alt text](image-32.png)
+
+In Spring, a profile is a way to segregate parts of your application configuration and make them available only in certain environments. This is useful for creating different configurations for development, testing, production, etc., without changing the main codebase.
+
+---
+
+### 20. How do you define beans for a specific profile?
+
+You can define beans for a specific profile using the `@Profile` annotation. This annotation indicates that a particular bean should only be created and managed by the Spring container if the specified profile is active.
+
+**Example**:
+
+```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    @Profile("dev")
+    public DataSource devDataSource() {
+        // return development DataSource
+    }
+
+    @Bean
+    @Profile("prod")
+    public DataSource prodDataSource() {
+        // return production DataSource
+    }
+}
+```
+
+In this example, the `devDataSource` bean will only be created if the "dev" profile is active, and the `prodDataSource` bean will only be created if the "prod" profile is active.
+
+---
+
+### 21. How do you create application configuration for a specific profile?
+
+You can create application configurations for specific profiles by using profile-specific configuration files. These files follow the naming convention `application-{profile}.properties` or `application-{profile}.yml`.
+
+**Example**:
+
+1. **`application.properties` (common configuration)**:
+   ```properties
+   app.name=MyApp
+   ```
+
+2. **`application-dev.properties` (development-specific configuration)**:
+   ```properties
+   app.environment=development
+   server.port=8081
+   ```
+
+3. **`application-prod.properties` (production-specific configuration)**:
+   ```properties
+   app.environment=production
+   server.port=8080
+   ```
+
+### Activating a Profile
+
+You can activate a profile in several ways:
+
+1. **Via Command Line**:
+   - Use the `--spring.profiles.active` parameter when starting the application.
+   ```bash
+   java -jar myapp.jar --spring.profiles.active=dev
+   ```
+
+2. **In `application.properties` or `application.yml`**:
+   - Add the `spring.profiles.active` property.
+   ```properties
+   spring.profiles.active=dev
+   ```
+   ```yaml
+   spring:
+     profiles:
+       active: dev
+   ```
+
+3. **Environment Variable**:
+   - Set the `SPRING_PROFILES_ACTIVE` environment variable.
+   ```bash
+   export SPRING_PROFILES_ACTIVE=dev
+   ```
+
+4. **Programmatically**:
+   - You can activate profiles programmatically using the `SpringApplication` class.
+   ```java
+   import org.springframework.boot.SpringApplication;
+   import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+   @SpringBootApplication
+   public class MyApp {
+
+       public static void main(String[] args) {
+           SpringApplication app = new SpringApplication(MyApp.class);
+           app.setAdditionalProfiles("dev");
+           app.run(args);
+       }
+   }
+   ```
+
+### Summary
+
+- **Profile**: A way to segregate parts of the application configuration for different environments (dev, test, prod, etc.).
+- **Defining Beans for a Profile**: Use the `@Profile` annotation on beans that should only be available in specific profiles.
+- **Profile-Specific Configuration Files**: Use `application-{profile}.properties` or `application-{profile}.yml` to define environment-specific settings.
+- **Activating a Profile**: Profiles can be activated via command line, configuration files.
+
+---
+
+### 22. What is Spring Boot Actuator?
+
+![alt text](image-33.png)
+
+So spring boot Actuator is basically an application which you can use to monitor your application with spring boot.
+
+Spring Boot Actuator provides various features like health checks, metrics, and more.
+All that you need to do is to add a simple dependency.
+
+![alt text](image-34.png)
+
+Application Metrics -> can get how many times user failed login / successful login
+
+Spring Boot Actuator is a sub-project of Spring Boot that provides production-ready features to help you monitor and manage your application. Actuator includes a number of built-in endpoints that provide various metrics, information, and control capabilities.
+
+---
+
+### 23. How to Monitor Web Services Using Spring Boot Actuator
+
+To monitor web services using Spring Boot Actuator, follow these steps:
+
+1. **Add the Actuator Dependency**:
+   Add the Spring Boot Actuator dependency to your `pom.xml` (Maven) or `build.gradle` (Gradle) file.
+
+   **Maven**:
+   ```xml
+   <dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-actuator</artifactId>
+   </dependency>
+   ```
+
+   **Gradle**:
+   ```groovy
+   implementation 'org.springframework.boot:spring-boot-starter-actuator'
+   ```
+
+2. **Enable Actuator Endpoints**:
+   By default, some actuator endpoints are disabled. You can enable them in your `application.properties` or `application.yml` file.
+
+   ```properties
+   management.endpoints.web.exposure.include=*
+   ```
+
+   ```yaml
+   management:
+     endpoints:
+       web:
+         exposure:
+           include: "*"
+   ```
+
+3. **Access Actuator Endpoints**:
+   Actuator provides several endpoints, such as `/actuator/health`, `/actuator/info`, and `/actuator/metrics`.
+
+   **Example Endpoints**:
+   - **Health Check**: `http://localhost:8080/actuator/health`
+   - **Application Info**: `http://localhost:8080/actuator/info`
+   - **Metrics**: `http://localhost:8080/actuator/metrics`
+
+4. **Customizing Actuator Endpoints**:
+   You can customize the actuator endpoints by configuring them in your `application.properties` or `application.yml`.
+
+   **Example**:
+   ```properties
+   management.endpoint.health.show-details=always
+   management.endpoint.info.enabled=true
+   ```
+
+   ```yaml
+   management:
+     endpoint:
+       health:
+         show-details: always
+       info:
+         enabled: true
+   ```
+
+### 24. How to Find More Information About Your Application Environment Using Spring Boot Actuator
+
+Spring Boot Actuator provides endpoints that offer detailed information about the application's environment. Here are a few key endpoints:
+
+1. **Environment Endpoint**: Provides details about the environment properties.
+   ```http
+   GET /actuator/env
+   ```
+
+2. **Configuration Properties Endpoint**: Displays the configuration properties of your application.
+   ```http
+   GET /actuator/configprops
+   ```
+
+3. **Beans Endpoint**: Lists all the beans in the application context.
+   ```http
+   GET /actuator/beans
+   ```
+
+4. **Mappings Endpoint**: Shows the request mappings in your application.
+   ```http
+   GET /actuator/mappings
+   ```
+
+5. **System Metrics**: Provides various metrics related to the system and JVM.
+   ```http
+   GET /actuator/metrics
+   ```
+
+### Example of Using Spring Boot Actuator
+
+1. **Setup**:
+   Add the necessary dependencies and enable actuator endpoints as described above.
+
+2. **Accessing the Environment Information**:
+   - **Environment Properties**:
+     ```http
+     GET /actuator/env
+     ```
+   - **Example Output**:
+     ```json
+     {
+       "activeProfiles": [
+         "dev"
+       ],
+       "propertySources": [
+         {
+           "name": "systemProperties",
+           "properties": {
+             "java.runtime.name": {
+               "value": "Java(TM) SE Runtime Environment"
+             },
+             ...
+           }
+         },
+         ...
+       ]
+     }
+     ```
+
+3. **Accessing Configuration Properties**:
+   - **Configuration Properties**:
+     ```http
+     GET /actuator/configprops
+     ```
+   - **Example Output**:
+     ```json
+     {
+       "contexts": {
+         "application": {
+           "beans": {
+             "spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties": {
+               "prefix": "spring.datasource",
+               "properties": {
+                 "url": "jdbc:h2:mem:testdb",
+                 "username": "sa",
+                 "password": ""
+               }
+             },
+             ...
+           }
+         }
+       }
+     }
+     ```
+
+By using Spring Boot Actuator, you can easily monitor your web services, gain insights into your application's environment, and manage your application effectively in a production setting.
+
+---
+
+### 25. What is a CommandLineRunner?
+
+![alt text](image-35.png)
+
+If you implement a CommandLineRunner and implement a bean in your application then you have to implement a `run` method.
+
+Then what will happen is, at the application startup time, Spring Boot will call the `run` method of the CommandLineRunner bean.
+
+![alt text](image-36.png)
+
+In Spring Boot, a `CommandLineRunner` is an interface that allows you to run specific pieces of code when the Spring application starts. It's typically used to perform tasks such as database initialization, data loading, or any kind of task that needs to be executed once the application is up and running. Here's a brief overview:
+
+1. **Interface Definition**: `CommandLineRunner` is defined in Spring Boot as follows:
+   ```java
+   @FunctionalInterface
+   public interface CommandLineRunner {
+       void run(String... args) throws Exception;
+   }
+   ```
+   It contains a single method `run`, which takes an array of `String` arguments (`args`) and can throw an `Exception`.
+
+2. **Usage**: To use `CommandLineRunner`, you implement this interface in a Spring Bean and override the `run` method. When the Spring context is fully loaded, Spring Boot automatically calls the `run` method of all beans that implement `CommandLineRunner`.
+
+3. **Example**: Here’s a simple example of a `CommandLineRunner` implementation:
+
+   ```java
+   import org.springframework.boot.CommandLineRunner;
+   import org.springframework.stereotype.Component;
+
+   @Component
+   public class MyCommandLineRunner implements CommandLineRunner {
+
+       @Override
+       public void run(String... args) throws Exception {
+           // Your initialization or startup code here
+           System.out.println("Application started with command-line arguments: ");
+           for (String arg : args) {
+               System.out.println(arg);
+           }
+       }
+   }
+   ```
+
+   In this example, `MyCommandLineRunner` is annotated with `@Component`, so it's automatically picked up by Spring Boot. When the application starts, the `run` method will print out any command-line arguments passed to the application.
+
+4. **Ordering**: If you have multiple `CommandLineRunner` beans, you can control the order in which they execute using the `@Order` annotation or by implementing the `Ordered` interface.
+
+Overall, `CommandLineRunner` is useful for executing specific tasks at application startup in a Spring Boot application, providing a way to perform initialization tasks or to trigger certain actions when the application context is ready.
