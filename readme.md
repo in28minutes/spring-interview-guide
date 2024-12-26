@@ -85,6 +85,9 @@ List of questions discussed about each topic is listed below.
 - What is a Session Attribute?
 - What is a init binder?
 - How do you set default date format with Spring?
+- How do you implement common logic for controllers in spring mvc?
+- What is a controller advice?
+- What is @exceptionhandler?
 - Why is Spring MVC so popular?
 
 ## Spring Boot
