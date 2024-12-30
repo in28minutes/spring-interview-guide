@@ -1,0 +1,11 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.project.sourcePaths": [
+        "beanexample/src/main/java/com/example/beanexample",
+        "8.project/demo/src/main/java/com/example/demo",
+        "7.qna",
+        "demo"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
